@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dev scripts & screenshots
+screenshot*.png
+screenshot*.cjs
+screenshot*.mjs
+remove-bg.cjs
+dev.log

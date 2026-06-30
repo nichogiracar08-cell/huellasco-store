@@ -1,26 +1,75 @@
 @import "tailwindcss";
 
+@theme inline {
+  /* HuellasCo Brand Colors */
+  --color-brand:        #3D2314;
+  --color-gold:         #C9973A;
+  --color-gold-dark:    #a87a2b;
+  --color-cream:        #F5E6C8;
+  --color-cream-dark:   #ecdcad;
+
+  /* Font */
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+
+  /* Easing */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #3D2314;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5E6C8;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9973A;
+  border-radius: 3px;
+}
+
+::selection {
+  background-color: #C9973A;
+  color: #ffffff;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes paw-bounce {
+  0%, 100% { transform: scale(1) rotate(-5deg); }
+  50%       { transform: scale(1.08) rotate(5deg); }
+}
+
+.animate-float   { animation: float 3.5s ease-in-out infinite; }
+.animate-paw     { animation: paw-bounce 2.5s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
