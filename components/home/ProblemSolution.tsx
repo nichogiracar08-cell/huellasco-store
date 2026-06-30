@@ -42,14 +42,6 @@ export default function ProblemSolution() {
 
         {/* Section header */}
         <div className="text-center mb-14">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-sm font-black uppercase tracking-widest text-[#C9973A] mb-3"
-          >
-            ¿Por qué importa?
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +76,7 @@ export default function ProblemSolution() {
               transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -8, scale: 1.015 }}
               style={{ willChange: 'transform' }}
-              className="card-shimmer relative flex flex-col p-7 rounded-3xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/50 hover:shadow-2xl hover:shadow-[#C9973A]/12 transition-[border-color,box-shadow] duration-300 group overflow-hidden cursor-default"
+              className="card-shimmer relative flex flex-col p-7 rounded-xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/50 hover:shadow-2xl hover:shadow-[#C9973A]/12 transition-[border-color,box-shadow] duration-300 group overflow-hidden cursor-default"
             >
               {/* Tag */}
               <span className={`self-start text-xs font-bold px-3 py-1 rounded-full mb-5 ${c.tagColor}`}>

@@ -102,7 +102,7 @@ export default function FeaturedProduct({ product }: Props) {
             <div className="relative aspect-square max-w-md mx-auto">
 
               {/* Main image */}
-              <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#ecdcad] border-2 border-[#C9973A]/20 shadow-2xl shadow-[#3D2314]/10">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#ecdcad] shadow-2xl shadow-[#3D2314]/10">
                 <Image
                   src={images[active].url}
                   alt={images[active].altText ?? productTitle}

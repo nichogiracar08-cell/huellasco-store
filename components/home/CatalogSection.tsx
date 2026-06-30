@@ -29,14 +29,6 @@ export default function CatalogSection() {
 
         {/* Section header */}
         <div className="text-center mb-12">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-sm font-black uppercase tracking-widest text-[#C9973A] mb-3"
-          >
-            Nuestro catálogo
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +64,7 @@ export default function CatalogSection() {
               variants={cardVariants}
               whileHover={{ y: -10, scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              className="card-shimmer group relative rounded-2xl sm:rounded-3xl bg-white border-2 border-[#F5E6C8] hover:border-[#C9973A]/50 hover:shadow-2xl hover:shadow-[#C9973A]/15 transition-[border-color,box-shadow] duration-300 overflow-hidden cursor-pointer"
+              className="card-shimmer group relative rounded-xl bg-white border-2 border-[#F5E6C8] hover:border-[#C9973A]/50 hover:shadow-2xl hover:shadow-[#C9973A]/15 transition-[border-color,box-shadow] duration-300 overflow-hidden cursor-pointer"
             >
               {/* Image area */}
               <div className={`aspect-square bg-gradient-to-br ${color} flex flex-col items-center justify-center relative overflow-hidden`}>

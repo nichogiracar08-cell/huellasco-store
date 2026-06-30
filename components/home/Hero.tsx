@@ -54,13 +54,13 @@ export default function Hero({ product }: Props) {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-[#F5E6C8] via-[#f0deb4] to-[#EDD9A3] overflow-hidden">
+    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-[#3D2314] via-[#4a2818] to-[#2a1810] overflow-hidden">
 
       {/* Animated background orbs for depth */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="animate-orb absolute top-[10%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#C9973A]/14 blur-3xl" />
-        <div className="animate-orb-slow absolute bottom-[5%] left-[5%] w-[400px] h-[400px] rounded-full bg-[#3D2314]/7 blur-3xl" />
-        <div className="animate-orb absolute top-[50%] left-[30%] w-[300px] h-[300px] rounded-full bg-[#C9973A]/8 blur-3xl" />
+        <div className="animate-orb absolute top-[10%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#C9973A]/20 blur-3xl" />
+        <div className="animate-orb-slow absolute bottom-[5%] left-[5%] w-[400px] h-[400px] rounded-full bg-[#C9973A]/10 blur-3xl" />
+        <div className="animate-orb absolute top-[50%] left-[30%] w-[300px] h-[300px] rounded-full bg-[#C9973A]/16 blur-3xl" />
       </div>
 
       {/* Paw texture layer */}
@@ -73,11 +73,11 @@ export default function Hero({ product }: Props) {
               top: p.top, left: p.left,
               width: p.size, height: p.size,
               animationDelay: p.delay,
-              opacity: 0.055,
+              opacity: 0.06,
               transform: `rotate(${p.rot}deg)`,
             }}
           >
-            <PawSVG color="#3D2314" />
+            <PawSVG color="#ffffff" />
           </div>
         ))}
       </div>
@@ -96,14 +96,14 @@ export default function Hero({ product }: Props) {
 
           <motion.h1
             custom={1} variants={fadeUp} initial="hidden" animate="show"
-            className="text-5xl sm:text-6xl lg:text-[4.25rem] font-black text-[#3D2314] leading-[1.04] tracking-tight"
+            className="text-5xl sm:text-6xl lg:text-[4.25rem] font-black text-white leading-[1.04] tracking-tight"
           >
             Tú trabajas<br />
             todo el día.
             <br />
             <span className="relative inline-block mt-2">
               <span className="text-[#C9973A]">Dale agua</span>
-              <span className="text-[#3D2314]"> que lo cuide.</span>
+              <span className="text-white"> que lo cuide.</span>
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 420 10" fill="none">
                 <path d="M2 7C120 2 300 2 418 7" stroke="#C9973A" strokeWidth="2.5" strokeLinecap="round" opacity="0.35"/>
               </svg>
@@ -112,10 +112,10 @@ export default function Hero({ product }: Props) {
 
           <motion.p
             custom={2} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-7 text-base sm:text-lg text-[#3D2314]/70 leading-relaxed max-w-lg"
+            className="mt-7 text-base sm:text-lg text-white/70 leading-relaxed max-w-lg"
           >
             Tu mascota te espera sola en casa. La{' '}
-            <strong className="text-[#3D2314] font-bold">Fuente Bebedero HuellasCo</strong>{' '}
+            <strong className="text-white font-bold">Fuente Bebedero HuellasCo</strong>{' '}
             mantiene el agua en movimiento constante, activa su instinto de hidratación y
             cuida sus riñones — todo por <strong className="text-[#C9973A]">$95.000 COP</strong>,{' '}
             menos que una sola consulta veterinaria.
@@ -126,7 +126,7 @@ export default function Hero({ product }: Props) {
             className="mt-6 space-y-2.5"
           >
             {benefits.map((b) => (
-              <li key={b} className="flex items-start gap-3 text-sm text-[#3D2314]/80">
+              <li key={b} className="flex items-start gap-3 text-sm text-white/70">
                 <CheckCircle2 className="w-4 h-4 text-[#C9973A] flex-shrink-0 mt-0.5" />
                 {b}
               </li>
@@ -158,7 +158,7 @@ export default function Hero({ product }: Props) {
               whileHover={{ scale: 1.04, borderColor: '#C9973A', color: '#C9973A' }}
               whileTap={{ scale: 0.97 }}
               transition={SPRING}
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white/60 backdrop-blur-sm border-2 border-[#3D2314]/20 text-[#3D2314] font-bold text-base cursor-pointer"
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold text-base cursor-pointer"
             >
               ¿Por qué importa?
             </motion.a>
@@ -166,7 +166,7 @@ export default function Hero({ product }: Props) {
 
           <motion.p
             custom={5} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-5 text-xs text-[#3D2314]/50 flex items-center gap-1.5"
+            className="mt-5 text-xs text-white/40 flex items-center gap-1.5"
           >
             <CheckCircle2 className="w-3.5 h-3.5 text-[#C9973A]" />
             Garantía 30 días · Envío a toda Colombia · Pago 100% seguro
@@ -191,7 +191,7 @@ export default function Hero({ product }: Props) {
             className="relative z-10 w-full max-w-[440px] animate-float cursor-pointer"
           >
             {/* Main image */}
-            <div className="relative w-full min-h-[400px] lg:min-h-[470px] rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-[#3D2314]/25 border-2 border-[#C9973A]/30">
+            <div className="relative w-full min-h-[400px] lg:min-h-[470px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-black/50">
               <Image
                 src={productImage}
                 alt={productTitle}
@@ -214,7 +214,7 @@ export default function Hero({ product }: Props) {
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.5, ease: EASE }}
               whileHover={{ scale: 1.04 }}
-              className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5 border border-[#F5E6C8]"
+              className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5 border border-white/10"
             >
               <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
               <div>
@@ -251,10 +251,10 @@ export default function Hero({ product }: Props) {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#3D2314]/40">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
         <span className="text-[10px] font-bold uppercase tracking-widest">Descubrir</span>
-        <div className="w-6 h-10 rounded-full border-2 border-[#3D2314]/20 flex items-start justify-center p-1">
-          <div className="w-1.5 h-3 rounded-full bg-[#C9973A] animate-bounce" />
+        <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1">
+          <div className="w-1.5 h-3 rounded-full bg-[#C9973A] animate-scroll-dot" />
         </div>
       </div>
     </section>

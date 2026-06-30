@@ -36,9 +36,6 @@ export default function TrustSection() {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <p className="text-sm font-black uppercase tracking-widest text-[#C9973A] mb-2">
-            Comprás con confianza
-          </p>
           <h2 className="text-2xl sm:text-3xl font-black text-[#3D2314]">
             Tu satisfacción, nuestra prioridad
           </h2>
@@ -55,7 +52,7 @@ export default function TrustSection() {
               transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -8, scale: 1.015 }}
               style={{ willChange: 'transform' }}
-              className="card-shimmer flex flex-col items-center text-center p-8 rounded-3xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/40 hover:shadow-2xl hover:shadow-[#C9973A]/12 transition-[border-color,box-shadow] duration-300 group overflow-hidden cursor-default"
+              className="card-shimmer flex flex-col items-center text-center p-8 rounded-xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/40 hover:shadow-2xl hover:shadow-[#C9973A]/12 transition-[border-color,box-shadow] duration-300 group overflow-hidden cursor-default"
             >
               {/* Icon */}
               <motion.div
