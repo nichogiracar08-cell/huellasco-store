@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 import type { Product } from '@/lib/shopify/types';
 
+const FALLBACK_HERO_IMAGE =
+  'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914&width=832';
+
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const SPRING = { type: 'spring', stiffness: 400, damping: 17 } as const;
 
@@ -42,7 +45,10 @@ interface Props {
 }
 
 export default function Hero({ product }: Props) {
-  const productImage = product?.featuredImage?.url ?? product?.images?.nodes[0]?.url ?? null;
+  const productImage =
+    product?.featuredImage?.url ??
+    product?.images?.nodes[0]?.url ??
+    FALLBACK_HERO_IMAGE;
   const productTitle = product?.title ?? 'Fuente Bebedero HuellasCo';
 
   return (
@@ -181,22 +187,14 @@ export default function Hero({ product }: Props) {
           >
             {/* Main image */}
             <div className="relative w-full min-h-[400px] lg:min-h-[470px] rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-[#3D2314]/25 border-2 border-[#C9973A]/30">
-              {productImage ? (
-                <Image
-                  src={productImage}
-                  alt={productTitle}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 440px, 440px"
-                  className="object-cover"
-                  priority
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center min-h-[400px]">
-                  <div className="text-8xl mb-4 animate-float">💧</div>
-                  <p className="text-xl font-black text-[#3D2314]">Fuente Bebedero</p>
-                  <p className="text-sm text-[#3D2314]/60 mt-1 font-semibold">HuellasCo · 2.5L</p>
-                </div>
-              )}
+              <Image
+                src={productImage}
+                alt={productTitle}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 440px, 440px"
+                className="object-cover object-center"
+                priority
+              />
 
               {/* Price overlay */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#3D2314]/90 via-[#3D2314]/45 to-transparent p-5 pt-14">

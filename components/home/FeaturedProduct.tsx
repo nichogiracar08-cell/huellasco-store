@@ -7,11 +7,29 @@ import {
   CheckCircle2, Droplets, Volume2, Timer, Zap, Maximize,
   ChevronLeft, ChevronRight,
 } from 'lucide-react';
-import type { Product } from '@/lib/shopify/types';
+import type { Product, ShopifyImage } from '@/lib/shopify/types';
 
 interface Props {
   product: Product | null;
 }
+
+const FALLBACK_IMAGES: ShopifyImage[] = [
+  {
+    url: 'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914&width=832',
+    altText: 'Fuente Bebedero HuellasCo — sin fondo',
+    width: 832, height: 832,
+  },
+  {
+    url: 'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/ChatGPT_Image_Jun_29_2026_04_02_13_PM.png?v=1782766940&width=832',
+    altText: 'Fuente Bebedero HuellasCo — vista general',
+    width: 832, height: 832,
+  },
+  {
+    url: 'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/fg.png?v=1782766966&width=832',
+    altText: 'Fuente Bebedero HuellasCo — detalle',
+    width: 832, height: 832,
+  },
+];
 
 const features = [
   { icon: <Droplets className="w-4 h-4" />, text: 'Filtro de carbón activado — agua limpia y sin olores' },
@@ -39,7 +57,9 @@ function getDiscount(price: string, compareAt: string): number {
 }
 
 export default function FeaturedProduct({ product }: Props) {
-  const images     = product?.images.nodes ?? [];
+  const images     = (product?.images.nodes ?? []).length > 0
+    ? product!.images.nodes
+    : FALLBACK_IMAGES;
   const variant    = product?.variants.nodes[0];
   const [active, setActive] = useState(0);
 
@@ -82,45 +102,31 @@ export default function FeaturedProduct({ product }: Props) {
 
               {/* Main image */}
               <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#ecdcad] border-2 border-[#C9973A]/20 shadow-2xl shadow-[#3D2314]/10">
-                {images.length > 0 ? (
+                <Image
+                  src={images[active].url}
+                  alt={images[active].altText ?? productTitle}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 448px"
+                  className="object-cover transition-all duration-500"
+                  priority
+                />
+                {images.length > 1 && (
                   <>
-                    <Image
-                      src={images[active].url}
-                      alt={images[active].altText ?? productTitle}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 448px"
-                      className="object-cover transition-all duration-500"
-                      priority
-                    />
-                    {images.length > 1 && (
-                      <>
-                        <button
-                          onClick={() => setActive((i) => (i - 1 + images.length) % images.length)}
-                          aria-label="Imagen anterior"
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition-colors"
-                        >
-                          <ChevronLeft className="w-4 h-4 text-[#3D2314]" />
-                        </button>
-                        <button
-                          onClick={() => setActive((i) => (i + 1) % images.length)}
-                          aria-label="Imagen siguiente"
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition-colors"
-                        >
-                          <ChevronRight className="w-4 h-4 text-[#3D2314]" />
-                        </button>
-                      </>
-                    )}
+                    <button
+                      onClick={() => setActive((i) => (i - 1 + images.length) % images.length)}
+                      aria-label="Imagen anterior"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <ChevronLeft className="w-4 h-4 text-[#3D2314]" />
+                    </button>
+                    <button
+                      onClick={() => setActive((i) => (i + 1) % images.length)}
+                      aria-label="Imagen siguiente"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <ChevronRight className="w-4 h-4 text-[#3D2314]" />
+                    </button>
                   </>
-                ) : (
-                  /* Placeholder while no Shopify images */
-                  <div className="w-full h-full flex flex-col items-center justify-center">
-                    <div className="text-8xl sm:text-9xl mb-4 animate-float">💧</div>
-                    <p className="text-xl font-black text-[#3D2314]">Fuente Bebedero</p>
-                    <p className="text-sm text-[#3D2314]/60 font-semibold mt-1">HuellasCo · 2.5L</p>
-                    <div className="absolute bottom-6 right-6 w-12 h-12 opacity-10">
-                      <PawSVG />
-                    </div>
-                  </div>
                 )}
 
                 {discount > 0 && (
