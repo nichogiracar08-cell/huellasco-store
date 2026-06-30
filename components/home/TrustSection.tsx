@@ -59,8 +59,8 @@ export default function TrustSection() {
             >
               {/* Icon */}
               <motion.div
-                whileHover={{ scale: 1.18, rotate: [0, -8, 8, 0] }}
-                transition={{ duration: 0.4 }}
+                whileHover={{ scale: 1.15, rotate: [0, -6, 6, 0] }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className="w-14 h-14 rounded-2xl bg-[#C9973A]/15 flex items-center justify-center text-[#C9973A] mb-5 group-hover:bg-[#C9973A] group-hover:text-white transition-colors duration-300"
               >
                 {b.icon}

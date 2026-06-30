@@ -83,8 +83,8 @@ export default function CatalogSection() {
 
                 {/* Product icon */}
                 <motion.div
-                  whileHover={{ scale: 1.15, rotate: [0, -6, 6, 0] }}
-                  transition={{ duration: 0.4 }}
+                  whileHover={{ scale: 1.12, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   className="text-5xl sm:text-6xl relative z-10 drop-shadow-sm"
                 >
                   {icon}

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import { CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 import type { Product } from '@/lib/shopify/types';
@@ -9,16 +9,8 @@ const FALLBACK_HERO_IMAGE =
   'https://cdn.shopify.com/s/files/1/0827/0872/5976/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914';
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
-const SPRING = { type: 'spring', stiffness: 400, damping: 17 } as const;
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.11, duration: 0.58, ease: EASE },
-  }),
-};
+/* Apple-style spring: duration + bounce easier to reason about than stiffness/damping */
+const SPRING = { type: 'spring', duration: 0.4, bounce: 0.15 } as const;
 
 const benefits = [
   'Agua en movimiento constante — activa el instinto de hidratación',
@@ -45,11 +37,21 @@ interface Props {
 }
 
 export default function Hero({ product }: Props) {
+  const shouldReduceMotion = useReducedMotion();
   const productImage =
     product?.featuredImage?.url ??
     product?.images?.nodes[0]?.url ??
     FALLBACK_HERO_IMAGE;
   const productTitle = product?.title ?? 'Fuente Bebedero HuellasCo';
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 32 },
+    show: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: shouldReduceMotion ? 0 : i * 0.11, duration: shouldReduceMotion ? 0.15 : 0.58, ease: EASE },
+    }),
+  };
 
   return (
     <section className="relative min-h-screen flex items-center bg-gradient-to-br from-[#F5E6C8] via-[#f0deb4] to-[#EDD9A3] overflow-hidden">
@@ -135,17 +137,20 @@ export default function Hero({ product }: Props) {
             custom={4} variants={fadeUp} initial="hidden" animate="show"
             className="mt-9 flex flex-wrap gap-4"
           >
-            {/* Primary CTA — spring hover + tap + attention glow */}
-            <motion.a
-              href="#producto"
-              whileHover={{ scale: 1.06, y: -3 }}
-              whileTap={{ scale: 0.96 }}
-              transition={SPRING}
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-[#C9973A] text-white font-bold text-base shadow-xl shadow-[#C9973A]/35 animate-glow cursor-pointer"
-            >
-              Ver producto
-              <ArrowRight className="w-4 h-4" />
-            </motion.a>
+            {/* Primary CTA — glow on wrapper div so button text never pulses */}
+            <div className="relative">
+              <div className="absolute inset-0 rounded-2xl animate-glow pointer-events-none" />
+              <motion.a
+                href="#producto"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                transition={SPRING}
+                className="relative inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-[#C9973A] text-white font-bold text-base shadow-xl shadow-[#C9973A]/35 cursor-pointer"
+              >
+                Ver producto
+                <ArrowRight className="w-4 h-4" />
+              </motion.a>
+            </div>
 
             {/* Secondary CTA */}
             <motion.a
@@ -170,9 +175,9 @@ export default function Hero({ product }: Props) {
 
         {/* ── RIGHT: Product card ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.88, y: 20 }}
+          initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.75, ease: EASE, delay: 0.2 }}
+          transition={{ duration: shouldReduceMotion ? 0.15 : 0.65, ease: EASE, delay: shouldReduceMotion ? 0 : 0.2 }}
           className="relative flex justify-center items-center py-12 lg:py-16"
         >
           {/* Layered glow rings */}
@@ -208,7 +213,7 @@ export default function Hero({ product }: Props) {
               initial={{ opacity: 0, x: 24, y: -8 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.5, ease: EASE }}
-              whileHover={{ scale: 1.06 }}
+              whileHover={{ scale: 1.04 }}
               className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5 border border-[#F5E6C8]"
             >
               <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
@@ -223,7 +228,7 @@ export default function Hero({ product }: Props) {
               initial={{ opacity: 0, x: -24, y: 8 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.85, duration: 0.5, ease: EASE }}
-              whileHover={{ scale: 1.06 }}
+              whileHover={{ scale: 1.04 }}
               className="absolute -bottom-5 -left-5 bg-[#3D2314] rounded-2xl shadow-xl px-4 py-3 text-white"
             >
               <p className="text-xs font-black">Envío a Colombia</p>
@@ -235,7 +240,7 @@ export default function Hero({ product }: Props) {
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1, duration: 0.5, ease: EASE }}
-              whileHover={{ scale: 1.06 }}
+              whileHover={{ scale: 1.04 }}
               className="absolute top-1/2 -right-7 -translate-y-1/2 bg-[#C9973A] rounded-2xl shadow-xl px-4 py-3 text-white"
             >
               <p className="text-[10px] font-bold opacity-90 leading-tight">vs. consulta vet.</p>

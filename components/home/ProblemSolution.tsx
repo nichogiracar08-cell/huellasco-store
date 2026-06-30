@@ -93,8 +93,8 @@ export default function ProblemSolution() {
 
               {/* Icon */}
               <motion.div
-                whileHover={{ scale: 1.2, rotate: [-4, 4, -2, 0] }}
-                transition={{ duration: 0.4 }}
+                whileHover={{ scale: 1.15, rotate: [-4, 4, 0] }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className="text-5xl mb-4 inline-block"
               >
                 {c.icon}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import {
   CheckCircle2, Droplets, Volume2, Timer, Zap, Maximize,
@@ -57,6 +57,7 @@ function getDiscount(price: string, compareAt: string): number {
 }
 
 export default function FeaturedProduct({ product }: Props) {
+  const shouldReduceMotion = useReducedMotion();
   const images     = (product?.images.nodes ?? []).length > 0
     ? product!.images.nodes
     : FALLBACK_IMAGES;
@@ -95,7 +96,7 @@ export default function FeaturedProduct({ product }: Props) {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0.15 : 0.55 }}
             className="lg:sticky lg:top-24"
           >
             <div className="relative aspect-square max-w-md mx-auto">
@@ -107,7 +108,7 @@ export default function FeaturedProduct({ product }: Props) {
                   alt={images[active].altText ?? productTitle}
                   fill
                   sizes="(max-width: 768px) 100vw, 448px"
-                  className="object-cover transition-all duration-500"
+                  className="object-cover transition-opacity duration-300"
                   priority
                 />
                 {images.length > 1 && (
@@ -143,7 +144,7 @@ export default function FeaturedProduct({ product }: Props) {
                     <button
                       key={idx}
                       onClick={() => setActive(idx)}
-                      className={`relative flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${
+                      className={`relative flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-[border-color,opacity] duration-200 ${
                         idx === active
                           ? 'border-[#C9973A] shadow-md'
                           : 'border-transparent opacity-60 hover:opacity-100'
@@ -178,7 +179,7 @@ export default function FeaturedProduct({ product }: Props) {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0.15 : 0.55 }}
             className="space-y-7"
           >
             {/* Title */}
