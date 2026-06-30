@@ -15,17 +15,17 @@ interface Props {
 
 const FALLBACK_IMAGES: ShopifyImage[] = [
   {
-    url: 'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914&width=832',
+    url: 'https://cdn.shopify.com/s/files/1/0827/0872/5976/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914',
     altText: 'Fuente Bebedero HuellasCo — sin fondo',
     width: 832, height: 832,
   },
   {
-    url: 'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/ChatGPT_Image_Jun_29_2026_04_02_13_PM.png?v=1782766940&width=832',
+    url: 'https://cdn.shopify.com/s/files/1/0827/0872/5976/files/ChatGPT_Image_Jun_29_2026_04_02_13_PM.png?v=1782766940',
     altText: 'Fuente Bebedero HuellasCo — vista general',
     width: 832, height: 832,
   },
   {
-    url: 'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/fg.png?v=1782766966&width=832',
+    url: 'https://cdn.shopify.com/s/files/1/0827/0872/5976/files/fg.png?v=1782766966',
     altText: 'Fuente Bebedero HuellasCo — detalle',
     width: 832, height: 832,
   },

@@ -6,7 +6,7 @@ import { CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 import type { Product } from '@/lib/shopify/types';
 
 const FALLBACK_HERO_IMAGE =
-  'https://b3r0vxutcii7f9ph-82708725976.shopifypreview.com/cdn/shop/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914&width=832';
+  'https://cdn.shopify.com/s/files/1/0827/0872/5976/files/1774735931photo_5186116145013000977_y-removebg-preview.png?v=1782766914';
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const SPRING = { type: 'spring', stiffness: 400, damping: 17 } as const;
