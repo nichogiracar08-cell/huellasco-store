@@ -24,11 +24,11 @@ const cardVariants = {
 
 export default function CatalogSection() {
   return (
-    <section id="catalogo" className="py-20 bg-[#F5E6C8]/40">
+    <section id="catalogo" className="py-12 sm:py-20 bg-[#F5E6C8]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,8 +106,9 @@ export default function CatalogSection() {
                   whileHover={{ scale: 1.02 }}
                   className="mt-3 w-full py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 bg-[#F5E6C8] text-[#3D2314]/60 cursor-not-allowed border border-[#e8d49a]"
                 >
-                  <Bell className="w-3 h-3" />
-                  Notificarme cuando llegue
+                  <Bell className="w-3 h-3 flex-shrink-0" />
+                  <span className="sm:hidden">Notificarme</span>
+                  <span className="hidden sm:inline">Notificarme cuando llegue</span>
                 </motion.button>
               </div>
             </motion.div>

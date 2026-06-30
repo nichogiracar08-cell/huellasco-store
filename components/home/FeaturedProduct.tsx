@@ -74,11 +74,11 @@ export default function FeaturedProduct({ product }: Props) {
   const productHref   = product ? `/products/${product.handle}` : '#producto';
 
   return (
-    <section id="producto" className="py-20 bg-gradient-to-b from-white to-[#F5E6C8]/40">
+    <section id="producto" className="py-12 sm:py-20 bg-gradient-to-b from-white to-[#F5E6C8]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Label */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 sm:mb-12">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export default function FeaturedProduct({ product }: Props) {
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
           {/* ── LEFT: Image gallery ── */}
           <motion.div
@@ -162,12 +162,12 @@ export default function FeaturedProduct({ product }: Props) {
                 </div>
               )}
 
-              {/* Floating badges */}
-              <div className="absolute -top-4 -left-4 bg-[#3D2314] text-white rounded-2xl px-4 py-2.5 shadow-xl">
+              {/* Floating badges — hidden on mobile to avoid overflow */}
+              <div className="hidden sm:block absolute -top-4 -left-4 bg-[#3D2314] text-white rounded-2xl px-4 py-2.5 shadow-xl">
                 <p className="text-xs font-bold opacity-80">Más vendido</p>
                 <p className="text-sm font-black">⭐ 4.9/5</p>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-[#C9973A] text-white rounded-2xl px-4 py-2.5 shadow-xl">
+              <div className="hidden sm:block absolute -bottom-4 -right-4 bg-[#C9973A] text-white rounded-2xl px-4 py-2.5 shadow-xl">
                 <p className="text-xs font-bold opacity-90">Solo</p>
                 <p className="text-base font-black">{priceLabel}</p>
               </div>
@@ -180,7 +180,7 @@ export default function FeaturedProduct({ product }: Props) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: shouldReduceMotion ? 0.15 : 0.55 }}
-            className="space-y-7"
+            className="space-y-5 sm:space-y-7"
           >
             {/* Title */}
             <div>
