@@ -66,10 +66,48 @@ body {
   50%       { transform: scale(1.08) rotate(5deg); }
 }
 
-.animate-float   { animation: float 3.5s ease-in-out infinite; }
-.animate-paw     { animation: paw-bounce 2.5s ease-in-out infinite; }
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 151, 58, 0.5), 0 20px 40px rgba(201, 151, 58, 0.3); }
+  50%       { box-shadow: 0 0 0 10px rgba(201, 151, 58, 0), 0 20px 50px rgba(201, 151, 58, 0.4); }
+}
+
+@keyframes gradient-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+.animate-float    { animation: float 3.5s ease-in-out infinite; }
+.animate-paw      { animation: paw-bounce 2.5s ease-in-out infinite; }
+.animate-glow     { animation: glow-pulse 2.5s ease-in-out infinite; }
+.animate-orb      { animation: gradient-orb 8s ease-in-out infinite; }
+.animate-orb-slow { animation: gradient-orb 12s ease-in-out infinite reverse; }
+
 .animate-shimmer {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
+}
+
+/* Shimmer sweep on card hover — slide diagonal highlight left→right */
+.card-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.28) 50%, transparent 65%);
+  transform: translateX(-100%) skewX(-12deg);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+.card-shimmer:hover::before {
+  transform: translateX(220%) skewX(-12deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-paw, .animate-shimmer, .animate-glow, .animate-orb, .animate-orb-slow {
+    animation: none;
+  }
+  .card-shimmer::before { transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

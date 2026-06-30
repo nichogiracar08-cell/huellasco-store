@@ -52,13 +52,19 @@ export default function TrustSection() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="flex flex-col items-center text-center p-8 rounded-3xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/30 hover:shadow-md transition-all duration-300 group"
+              transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -8, scale: 1.015 }}
+              style={{ willChange: 'transform' }}
+              className="card-shimmer flex flex-col items-center text-center p-8 rounded-3xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/40 hover:shadow-2xl hover:shadow-[#C9973A]/12 transition-[border-color,box-shadow] duration-300 group overflow-hidden cursor-default"
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-[#C9973A]/15 flex items-center justify-center text-[#C9973A] mb-5 group-hover:bg-[#C9973A] group-hover:text-white transition-all duration-300">
+              <motion.div
+                whileHover={{ scale: 1.18, rotate: [0, -8, 8, 0] }}
+                transition={{ duration: 0.4 }}
+                className="w-14 h-14 rounded-2xl bg-[#C9973A]/15 flex items-center justify-center text-[#C9973A] mb-5 group-hover:bg-[#C9973A] group-hover:text-white transition-colors duration-300"
+              >
                 {b.icon}
-              </div>
+              </motion.div>
 
               <h3 className="font-black text-[#3D2314] text-base mb-2">{b.title}</h3>
               <p className="text-sm text-[#3D2314]/65 leading-relaxed mb-3">{b.desc}</p>
@@ -76,14 +82,17 @@ export default function TrustSection() {
           className="mt-12 text-center"
         >
           <p className="text-2xl font-black text-[#3D2314]">
-            "Amor que <span className="text-[#C9973A]">🐾</span> deja huella"
+            "Amor que deja <span className="text-[#C9973A]">huella</span>"
           </p>
-          <a
+          <motion.a
             href="#producto"
-            className="inline-flex items-center gap-2 mt-6 px-8 py-4 rounded-2xl bg-[#3D2314] text-white font-black text-base hover:bg-[#2a1509] transition-all shadow-xl hover:-translate-y-1 active:translate-y-0"
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 380, damping: 18 }}
+            className="inline-flex items-center gap-2 mt-6 px-8 py-4 rounded-2xl bg-[#3D2314] text-white font-black text-base shadow-xl shadow-[#3D2314]/30 cursor-pointer"
           >
             Quiero la fuente bebedero →
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

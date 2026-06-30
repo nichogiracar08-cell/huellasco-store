@@ -1,15 +1,26 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Bell } from 'lucide-react';
 
 const placeholders = [
-  'Cama Ortopédica Premium',
-  'Arnés Ergonómico',
-  'Juguete Interactivo',
-  'Rascador Moderno',
-  'Correa Retráctil',
-  'Kit Higiene Completo',
+  { name: 'Cama Ortopédica Premium',  icon: '🛏️', color: 'from-[#F5E6C8] to-[#ecdcad]' },
+  { name: 'Arnés Ergonómico',          icon: '🦺', color: 'from-[#fce8d5] to-[#f5d4b0]' },
+  { name: 'Juguete Interactivo',       icon: '🎾', color: 'from-[#e8f0e8] to-[#d4e8d4]' },
+  { name: 'Rascador Moderno',          icon: '🐱', color: 'from-[#F5E6C8] to-[#ecdcad]' },
+  { name: 'Correa Retráctil',          icon: '🐕', color: 'from-[#fce8d5] to-[#f5d4b0]' },
+  { name: 'Kit Higiene Completo',      icon: '✨', color: 'from-[#eee8f5] to-[#ddd4f0]' },
 ];
+
+const containerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.48, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export default function CatalogSection() {
   return (
@@ -42,30 +53,45 @@ export default function CatalogSection() {
             transition={{ delay: 0.12 }}
             className="mt-3 text-[#3D2314]/60 max-w-md mx-auto"
           >
-            Estamos curado la mejor selección de accesorios para tu mascota.
+            Estamos curando la mejor selección de accesorios para tu mascota.
             Suscríbete para ser el primero en saber.
           </motion.p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
-          {placeholders.map((name, i) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6"
+        >
+          {placeholders.map(({ name, icon, color }) => (
             <motion.div
               key={name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.45 }}
-              className="group relative rounded-2xl sm:rounded-3xl bg-white border-2 border-[#F5E6C8] hover:border-[#C9973A]/40 hover:shadow-lg transition-all duration-300 overflow-hidden"
+              variants={cardVariants}
+              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="card-shimmer group relative rounded-2xl sm:rounded-3xl bg-white border-2 border-[#F5E6C8] hover:border-[#C9973A]/50 hover:shadow-2xl hover:shadow-[#C9973A]/15 transition-[border-color,box-shadow] duration-300 overflow-hidden cursor-pointer"
             >
               {/* Image area */}
-              <div className="aspect-square bg-gradient-to-br from-[#F5E6C8] to-[#ecdcad] flex items-center justify-center relative">
-                {/* Paw watermark */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-500">
+              <div className={`aspect-square bg-gradient-to-br ${color} flex flex-col items-center justify-center relative overflow-hidden`}>
+                {/* Background paw watermark */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-[0.07]">
                   <PawSVG />
                 </div>
+
+                {/* Product icon */}
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: [0, -6, 6, 0] }}
+                  transition={{ duration: 0.4 }}
+                  className="text-5xl sm:text-6xl relative z-10 drop-shadow-sm"
+                >
+                  {icon}
+                </motion.div>
+
                 {/* Coming soon badge */}
-                <div className="absolute top-3 left-3 bg-[#3D2314] text-white text-[10px] font-black px-2.5 py-1 rounded-full">
+                <div className="absolute top-3 left-3 bg-[#3D2314] text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-md">
                   Próximamente
                 </div>
               </div>
@@ -79,20 +105,22 @@ export default function CatalogSection() {
                   {name}
                 </p>
                 <p className="text-xs text-[#3D2314]/50 mt-1.5 leading-relaxed">
-                  Para tu mascota 🐾
+                  Para tu mascota
                 </p>
 
                 {/* Notify button */}
-                <button
+                <motion.button
                   disabled
-                  className="mt-3 w-full py-2 rounded-xl text-xs font-bold bg-[#F5E6C8] text-[#3D2314]/60 cursor-not-allowed border border-[#F5E6C8]"
+                  whileHover={{ scale: 1.02 }}
+                  className="mt-3 w-full py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 bg-[#F5E6C8] text-[#3D2314]/60 cursor-not-allowed border border-[#e8d49a]"
                 >
+                  <Bell className="w-3 h-3" />
                   Notificarme cuando llegue
-                </button>
+                </motion.button>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
         <motion.div
@@ -103,12 +131,14 @@ export default function CatalogSection() {
         >
           <p className="text-sm text-[#3D2314]/60">
             ¿Quieres saber cuándo llegan?{' '}
-            <a
+            <motion.a
               href="mailto:huellasco00@gmail.com"
-              className="text-[#C9973A] font-bold hover:underline"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="text-[#C9973A] font-bold hover:underline inline-block"
             >
               Escríbenos
-            </a>{' '}
+            </motion.a>{' '}
             y te avisamos primero.
           </p>
         </motion.div>
@@ -119,7 +149,7 @@ export default function CatalogSection() {
 
 function PawSVG() {
   return (
-    <svg viewBox="0 0 100 100" fill="#3D2314" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <svg viewBox="0 0 100 100" fill="#3D2314" xmlns="http://www.w3.org/2000/svg" className="w-24 h-24">
       <ellipse cx="50" cy="63" rx="21" ry="19" />
       <ellipse cx="24" cy="44" rx="10" ry="8"  transform="rotate(-18 24 44)" />
       <ellipse cx="38" cy="34" rx="10" ry="8"  transform="rotate(-6  38 34)" />

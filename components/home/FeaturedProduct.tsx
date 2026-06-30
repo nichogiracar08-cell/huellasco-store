@@ -214,14 +214,25 @@ export default function FeaturedProduct({ product }: Props) {
 
             {/* CTA */}
             <div className="space-y-3 pt-2">
-              <a
-                href={productHref}
-                className="flex items-center justify-center gap-2 w-full py-5 rounded-2xl bg-[#C9973A] text-white font-black text-lg hover:bg-[#a87a2b] transition-all shadow-xl shadow-[#C9973A]/30 hover:shadow-[#C9973A]/40 hover:-translate-y-1 active:translate-y-0"
-              >
-                🐾 Lo quiero
-              </a>
-              <p className="text-center text-xs text-[#3D2314]/50">
-                🛡️ Garantía 30 días · 🔒 Pago seguro · 🚚 Envío a toda Colombia
+              <div className="relative">
+                {/* Attention pulse ring behind button */}
+                <div className="absolute inset-0 rounded-2xl animate-glow pointer-events-none" />
+                <motion.a
+                  href={productHref}
+                  whileHover={{ scale: 1.04, y: -3 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 18 }}
+                  className="relative flex items-center justify-center gap-2 w-full py-5 rounded-2xl bg-[#C9973A] text-white font-black text-lg shadow-xl shadow-[#C9973A]/35 cursor-pointer"
+                >
+                  Lo quiero ahora →
+                </motion.a>
+              </div>
+              <p className="text-center text-xs text-[#3D2314]/50 flex items-center justify-center gap-3">
+                <span>Garantía 30 días</span>
+                <span className="w-1 h-1 rounded-full bg-[#3D2314]/30 inline-block" />
+                <span>Pago seguro</span>
+                <span className="w-1 h-1 rounded-full bg-[#3D2314]/30 inline-block" />
+                <span>Envío Colombia</span>
               </p>
             </div>
 

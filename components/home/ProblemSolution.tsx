@@ -81,8 +81,10 @@ export default function ProblemSolution() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="relative flex flex-col p-7 rounded-3xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/40 hover:shadow-lg transition-all duration-300 group"
+              transition={{ delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -8, scale: 1.015 }}
+              style={{ willChange: 'transform' }}
+              className="card-shimmer relative flex flex-col p-7 rounded-3xl bg-[#F5E6C8]/50 border border-[#F5E6C8] hover:border-[#C9973A]/50 hover:shadow-2xl hover:shadow-[#C9973A]/12 transition-[border-color,box-shadow] duration-300 group overflow-hidden cursor-default"
             >
               {/* Tag */}
               <span className={`self-start text-xs font-bold px-3 py-1 rounded-full mb-5 ${c.tagColor}`}>
@@ -90,9 +92,13 @@ export default function ProblemSolution() {
               </span>
 
               {/* Icon */}
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: [-4, 4, -2, 0] }}
+                transition={{ duration: 0.4 }}
+                className="text-5xl mb-4 inline-block"
+              >
                 {c.icon}
-              </div>
+              </motion.div>
 
               {/* Text */}
               <h3 className="font-black text-base text-[#3D2314] mb-2 leading-tight">
@@ -104,9 +110,16 @@ export default function ProblemSolution() {
 
               {/* Stat */}
               <div className="mt-5 pt-5 border-t border-[#3D2314]/10">
-                <p className="text-2xl font-black" style={{ color: c.accent }}>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 + 0.3 }}
+                  className="text-2xl font-black"
+                  style={{ color: c.accent }}
+                >
                   {c.stat}
-                </p>
+                </motion.p>
                 <p className="text-xs text-[#3D2314]/50 mt-0.5 font-semibold">
                   {c.statLabel}
                 </p>

@@ -2,17 +2,18 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 import type { Product } from '@/lib/shopify/types';
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
+const SPRING = { type: 'spring', stiffness: 400, damping: 17 } as const;
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 32 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.11, duration: 0.55, ease: EASE },
+    transition: { delay: i * 0.11, duration: 0.58, ease: EASE },
   }),
 };
 
@@ -23,7 +24,6 @@ const benefits = [
   '110V / 60Hz — compatible con voltaje colombiano',
 ];
 
-/* Paw positions scattered across the hero background */
 const pawPositions = [
   { top: '8%',  left: '5%',  size: 36, delay: '0s',    rot: -15 },
   { top: '22%', left: '2%',  size: 22, delay: '0.6s',  rot: 10  },
@@ -46,30 +46,32 @@ export default function Hero({ product }: Props) {
   const productTitle = product?.title ?? 'Fuente Bebedero HuellasCo';
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-[#F5E6C8] via-[#f0deb4] to-[#EDD9A3]">
+    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-[#F5E6C8] via-[#f0deb4] to-[#EDD9A3] overflow-hidden">
 
-      {/* Paw texture layer — opacity 5% */}
+      {/* Animated background orbs for depth */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="animate-orb absolute top-[10%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#C9973A]/14 blur-3xl" />
+        <div className="animate-orb-slow absolute bottom-[5%] left-[5%] w-[400px] h-[400px] rounded-full bg-[#3D2314]/7 blur-3xl" />
+        <div className="animate-orb absolute top-[50%] left-[30%] w-[300px] h-[300px] rounded-full bg-[#C9973A]/8 blur-3xl" />
+      </div>
+
+      {/* Paw texture layer */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {pawPositions.map((p, i) => (
           <div
             key={i}
             className="absolute animate-float"
             style={{
-              top: p.top,
-              left: p.left,
-              width: p.size,
-              height: p.size,
+              top: p.top, left: p.left,
+              width: p.size, height: p.size,
               animationDelay: p.delay,
-              opacity: 0.05,
+              opacity: 0.055,
               transform: `rotate(${p.rot}deg)`,
             }}
           >
             <PawSVG color="#3D2314" />
           </div>
         ))}
-        {/* Soft background glows */}
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#C9973A]/12 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#3D2314]/6 blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10 w-full">
@@ -78,29 +80,31 @@ export default function Hero({ product }: Props) {
         <div>
           <motion.div
             custom={0} variants={fadeUp} initial="hidden" animate="show"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9973A]/20 border border-[#C9973A]/40 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9973A]/20 border border-[#C9973A]/40 mb-7 backdrop-blur-sm"
           >
-            <span className="w-2 h-2 rounded-full bg-[#C9973A] animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-[#C9973A]" />
             <span className="text-sm font-bold text-[#C9973A]">Nuevo en Colombia 🇨🇴</span>
           </motion.div>
 
           <motion.h1
             custom={1} variants={fadeUp} initial="hidden" animate="show"
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#3D2314] leading-[1.08] tracking-tight"
+            className="text-5xl sm:text-6xl lg:text-[4.25rem] font-black text-[#3D2314] leading-[1.04] tracking-tight"
           >
-            Tú trabajas todo el día.
+            Tú trabajas<br />
+            todo el día.
             <br />
-            <span className="relative inline-block mt-1">
-              <span className="text-[#C9973A]">Dale agua que lo cuide.</span>
-              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 10" fill="none">
-                <path d="M2 7C80 2 220 2 298 7" stroke="#3D2314" strokeWidth="2.5" strokeLinecap="round" opacity="0.25"/>
+            <span className="relative inline-block mt-2">
+              <span className="text-[#C9973A]">Dale agua</span>
+              <span className="text-[#3D2314]"> que lo cuide.</span>
+              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 420 10" fill="none">
+                <path d="M2 7C120 2 300 2 418 7" stroke="#C9973A" strokeWidth="2.5" strokeLinecap="round" opacity="0.35"/>
               </svg>
             </span>
           </motion.h1>
 
           <motion.p
             custom={2} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-6 text-base sm:text-lg text-[#3D2314]/70 leading-relaxed max-w-lg"
+            className="mt-7 text-base sm:text-lg text-[#3D2314]/70 leading-relaxed max-w-lg"
           >
             Tu mascota te espera sola en casa. La{' '}
             <strong className="text-[#3D2314] font-bold">Fuente Bebedero HuellasCo</strong>{' '}
@@ -123,46 +127,60 @@ export default function Hero({ product }: Props) {
 
           <motion.div
             custom={4} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-9 flex flex-wrap gap-4"
           >
-            <a
+            {/* Primary CTA — spring hover + tap + attention glow */}
+            <motion.a
               href="#producto"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-[#C9973A] text-white font-bold text-base hover:bg-[#a87a2b] transition-all shadow-xl shadow-[#C9973A]/30 hover:shadow-[#C9973A]/40 hover:-translate-y-1 active:translate-y-0"
+              whileHover={{ scale: 1.06, y: -3 }}
+              whileTap={{ scale: 0.96 }}
+              transition={SPRING}
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-[#C9973A] text-white font-bold text-base shadow-xl shadow-[#C9973A]/35 animate-glow cursor-pointer"
             >
               Ver producto
               <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
+            </motion.a>
+
+            {/* Secondary CTA */}
+            <motion.a
               href="#por-que"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white/60 backdrop-blur-sm border-2 border-[#3D2314]/20 text-[#3D2314] font-bold text-base hover:border-[#C9973A] hover:text-[#C9973A] transition-all"
+              whileHover={{ scale: 1.04, borderColor: '#C9973A', color: '#C9973A' }}
+              whileTap={{ scale: 0.97 }}
+              transition={SPRING}
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white/60 backdrop-blur-sm border-2 border-[#3D2314]/20 text-[#3D2314] font-bold text-base cursor-pointer"
             >
               ¿Por qué importa?
-            </a>
+            </motion.a>
           </motion.div>
 
           <motion.p
             custom={5} variants={fadeUp} initial="hidden" animate="show"
             className="mt-5 text-xs text-[#3D2314]/50 flex items-center gap-1.5"
           >
-            <span>🛡️</span> Garantía de devolución 30 días · Envío a toda Colombia · Pago 100% seguro
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#C9973A]" />
+            Garantía 30 días · Envío a toda Colombia · Pago 100% seguro
           </motion.p>
         </div>
 
         {/* ── RIGHT: Product card ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.88 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.25 }}
+          initial={{ opacity: 0, scale: 0.88, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.75, ease: EASE, delay: 0.2 }}
           className="relative flex justify-center items-center py-12 lg:py-16"
         >
-          {/* Glow ring behind card */}
-          <div className="absolute w-[420px] h-[420px] lg:w-[500px] lg:h-[500px] rounded-full bg-[#C9973A]/15 blur-2xl animate-pulse" />
+          {/* Layered glow rings */}
+          <div className="absolute w-[440px] h-[440px] lg:w-[520px] lg:h-[520px] rounded-full bg-[#C9973A]/12 blur-3xl animate-pulse" />
+          <div className="absolute w-[320px] h-[320px] lg:w-[380px] lg:h-[380px] rounded-full bg-[#C9973A]/8 blur-2xl" />
 
           {/* Product card */}
-          <div className="relative z-10 w-full max-w-[440px] animate-float">
-
+          <motion.div
+            whileHover={{ y: -6, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 250, damping: 22 }}
+            className="relative z-10 w-full max-w-[440px] animate-float cursor-pointer"
+          >
             {/* Main image */}
-            <div className="relative w-full min-h-[400px] lg:min-h-[460px] rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-[#3D2314]/25 border-2 border-[#C9973A]/30">
+            <div className="relative w-full min-h-[400px] lg:min-h-[470px] rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-[#3D2314]/25 border-2 border-[#C9973A]/30">
               {productImage ? (
                 <Image
                   src={productImage}
@@ -174,14 +192,14 @@ export default function Hero({ product }: Props) {
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center min-h-[400px]">
-                  <div className="text-8xl mb-4">💧</div>
+                  <div className="text-8xl mb-4 animate-float">💧</div>
                   <p className="text-xl font-black text-[#3D2314]">Fuente Bebedero</p>
                   <p className="text-sm text-[#3D2314]/60 mt-1 font-semibold">HuellasCo · 2.5L</p>
                 </div>
               )}
 
               {/* Price overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#3D2314]/85 via-[#3D2314]/40 to-transparent p-5 pt-12">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#3D2314]/90 via-[#3D2314]/45 to-transparent p-5 pt-14">
                 <p className="text-white font-black text-2xl drop-shadow">$95.000 COP</p>
                 <p className="text-white/70 text-sm font-semibold mt-0.5 truncate">{productTitle}</p>
               </div>
@@ -192,9 +210,10 @@ export default function Hero({ product }: Props) {
               initial={{ opacity: 0, x: 24, y: -8 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.5, ease: EASE }}
+              whileHover={{ scale: 1.06 }}
               className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5 border border-[#F5E6C8]"
             >
-              <span className="text-2xl">🛡️</span>
+              <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
               <div>
                 <p className="text-xs font-black text-[#3D2314] leading-tight">Garantía 30 días</p>
                 <p className="text-[10px] text-[#3D2314]/50 mt-0.5">Sin preguntas</p>
@@ -206,9 +225,10 @@ export default function Hero({ product }: Props) {
               initial={{ opacity: 0, x: -24, y: 8 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.85, duration: 0.5, ease: EASE }}
+              whileHover={{ scale: 1.06 }}
               className="absolute -bottom-5 -left-5 bg-[#3D2314] rounded-2xl shadow-xl px-4 py-3 text-white"
             >
-              <p className="text-xs font-black">🚚 Envío a Colombia</p>
+              <p className="text-xs font-black">Envío a Colombia</p>
               <p className="text-[10px] opacity-70 mt-0.5">2-5 días hábiles</p>
             </motion.div>
 
@@ -217,12 +237,13 @@ export default function Hero({ product }: Props) {
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1, duration: 0.5, ease: EASE }}
-              className="absolute top-1/2 -right-6 -translate-y-1/2 bg-[#C9973A] rounded-2xl shadow-xl px-4 py-3 text-white"
+              whileHover={{ scale: 1.06 }}
+              className="absolute top-1/2 -right-7 -translate-y-1/2 bg-[#C9973A] rounded-2xl shadow-xl px-4 py-3 text-white"
             >
               <p className="text-[10px] font-bold opacity-90 leading-tight">vs. consulta vet.</p>
               <p className="text-sm font-black">$200k–$500k</p>
             </motion.div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
