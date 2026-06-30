@@ -40,6 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# agent skills & local claude config
+.agents/
+.claude/
+
 # dev scripts & screenshots
 screenshot*.png
 screenshot*.cjs
