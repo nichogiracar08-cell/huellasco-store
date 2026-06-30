@@ -82,13 +82,13 @@ export default function Hero({ product }: Props) {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 lg:py-20 grid lg:grid-cols-2 gap-6 lg:gap-16 items-center relative z-10 w-full">
 
         {/* ── LEFT: Copy ── */}
-        <div>
+        <div className="order-2 lg:order-first">
           <motion.div
             custom={0} variants={fadeUp} initial="hidden" animate="show"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9973A]/20 border border-[#C9973A]/40 mb-7 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9973A]/20 border border-[#C9973A]/40 mb-4 sm:mb-7 backdrop-blur-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#C9973A]" />
             <span className="text-sm font-bold text-[#C9973A]">Nuevo en Colombia 🇨🇴</span>
@@ -96,7 +96,7 @@ export default function Hero({ product }: Props) {
 
           <motion.h1
             custom={1} variants={fadeUp} initial="hidden" animate="show"
-            className="text-5xl sm:text-6xl lg:text-[4.25rem] font-black text-white leading-[1.04] tracking-tight"
+            className="text-[2.6rem] sm:text-5xl lg:text-[4.25rem] font-black text-white leading-[1.06] sm:leading-[1.04] tracking-tight"
           >
             Tú trabajas<br />
             todo el día.
@@ -112,7 +112,7 @@ export default function Hero({ product }: Props) {
 
           <motion.p
             custom={2} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-7 text-base sm:text-lg text-white/70 leading-relaxed max-w-lg"
+            className="mt-4 sm:mt-7 text-base sm:text-lg text-white/70 leading-relaxed max-w-lg"
           >
             Tu mascota te espera sola en casa. La{' '}
             <strong className="text-white font-bold">Fuente Bebedero HuellasCo</strong>{' '}
@@ -123,7 +123,7 @@ export default function Hero({ product }: Props) {
 
           <motion.ul
             custom={3} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-6 space-y-2.5"
+            className="mt-4 sm:mt-6 space-y-2"
           >
             {benefits.map((b) => (
               <li key={b} className="flex items-start gap-3 text-sm text-white/70">
@@ -135,7 +135,7 @@ export default function Hero({ product }: Props) {
 
           <motion.div
             custom={4} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-9 flex flex-wrap gap-4"
+            className="mt-6 sm:mt-9 flex flex-wrap gap-3 sm:gap-4"
           >
             {/* Primary CTA — glow on wrapper div so button text never pulses */}
             <div className="relative">
@@ -178,11 +178,11 @@ export default function Hero({ product }: Props) {
           initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.95, y: shouldReduceMotion ? 0 : 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: shouldReduceMotion ? 0.15 : 0.65, ease: EASE, delay: shouldReduceMotion ? 0 : 0.2 }}
-          className="relative flex justify-center items-center py-12 lg:py-16"
+          className="order-1 lg:order-last relative flex justify-center items-center pt-8 pb-6 sm:py-12 lg:py-16"
         >
           {/* Layered glow rings */}
-          <div className="absolute w-[440px] h-[440px] lg:w-[520px] lg:h-[520px] rounded-full bg-[#C9973A]/12 blur-3xl animate-pulse" />
-          <div className="absolute w-[320px] h-[320px] lg:w-[380px] lg:h-[380px] rounded-full bg-[#C9973A]/8 blur-2xl" />
+          <div className="absolute w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] lg:w-[520px] lg:h-[520px] rounded-full bg-[#C9973A]/12 blur-3xl animate-pulse" />
+          <div className="absolute w-[200px] h-[200px] sm:w-[320px] sm:h-[320px] lg:w-[380px] lg:h-[380px] rounded-full bg-[#C9973A]/8 blur-2xl" />
 
           {/* Product card */}
           <motion.div
@@ -191,7 +191,7 @@ export default function Hero({ product }: Props) {
             className="relative z-10 w-full max-w-[440px] animate-float cursor-pointer"
           >
             {/* Main image */}
-            <div className="relative w-full min-h-[400px] lg:min-h-[470px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-black/50">
+            <div className="relative w-full min-h-[260px] sm:min-h-[380px] lg:min-h-[470px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5E6C8] to-[#e8d49a] shadow-2xl shadow-black/50">
               <Image
                 src={productImage}
                 alt={productTitle}
@@ -214,7 +214,7 @@ export default function Hero({ product }: Props) {
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.7, duration: 0.5, ease: EASE }}
               whileHover={{ scale: 1.04 }}
-              className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5 border border-white/10"
+              className="hidden sm:flex absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl px-4 py-3 items-center gap-2.5 border border-white/10"
             >
               <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
               <div>
@@ -229,7 +229,7 @@ export default function Hero({ product }: Props) {
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 0.85, duration: 0.5, ease: EASE }}
               whileHover={{ scale: 1.04 }}
-              className="absolute -bottom-5 -left-5 bg-[#3D2314] rounded-2xl shadow-xl px-4 py-3 text-white"
+              className="hidden sm:block absolute -bottom-5 -left-5 bg-[#3D2314] rounded-2xl shadow-xl px-4 py-3 text-white"
             >
               <p className="text-xs font-black">Envío a Colombia</p>
               <p className="text-[10px] opacity-70 mt-0.5">2-5 días hábiles</p>
@@ -241,11 +241,24 @@ export default function Hero({ product }: Props) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1, duration: 0.5, ease: EASE }}
               whileHover={{ scale: 1.04 }}
-              className="absolute top-1/2 -right-7 -translate-y-1/2 bg-[#C9973A] rounded-2xl shadow-xl px-4 py-3 text-white"
+              className="hidden sm:block absolute top-1/2 -right-7 -translate-y-1/2 bg-[#C9973A] rounded-2xl shadow-xl px-4 py-3 text-white"
             >
               <p className="text-[10px] font-bold opacity-90 leading-tight">vs. consulta vet.</p>
               <p className="text-sm font-black">$200k–$500k</p>
             </motion.div>
+            {/* Mobile trust strip — replaces floating badges */}
+            <div className="flex sm:hidden mt-3 gap-2 justify-center flex-wrap">
+              <span className="flex items-center gap-1.5 text-[11px] font-bold text-white/80 bg-white/10 rounded-full px-3 py-1.5">
+                <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                Garantía 30 días
+              </span>
+              <span className="text-[11px] font-bold text-white/80 bg-white/10 rounded-full px-3 py-1.5">
+                Envío a Colombia
+              </span>
+              <span className="text-[11px] font-bold text-[#C9973A] bg-[#C9973A]/15 rounded-full px-3 py-1.5">
+                vs. vet $200k–$500k
+              </span>
+            </div>
           </motion.div>
         </motion.div>
       </div>
