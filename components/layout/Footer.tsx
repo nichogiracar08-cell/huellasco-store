@@ -43,51 +43,68 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="bg-[#3D2314] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6 sm:pt-12 sm:pb-8">
 
-          {/* Brand */}
-          <div>
+        {/* Brand — full width on mobile */}
+        <div className="mb-6 sm:mb-0 sm:hidden">
+          <Link href="/" className="flex items-center gap-2 mb-3 group">
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden bg-[#F5E6C8] flex-shrink-0">
+              <Image src="/images/logo.png" alt="HuellasCo" fill sizes="36px" className="object-contain p-1 mix-blend-multiply" />
+            </div>
+            <span className="font-black text-lg text-white group-hover:text-[#C9973A] transition-colors">
+              Huellas<span className="text-[#C9973A]">Co</span>
+            </span>
+          </Link>
+          <p className="text-sm text-white/60 leading-relaxed mb-4 max-w-xs">
+            Productos de calidad para el bienestar de tus mascotas.
+          </p>
+          <div className="flex items-center justify-between">
+            <a href="mailto:huellasco00@gmail.com" className="inline-flex items-center gap-1.5 text-xs text-[#C9973A] font-semibold">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,12 2,6" />
+              </svg>
+              huellasco00@gmail.com
+            </a>
+            <div className="flex gap-2">
+              {socialLinks.map((s) => (
+                <a key={s.label} href={s.href} aria-label={s.label}
+                  className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C9973A] transition-colors text-white/80 hover:text-white">
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 3-col grid — desktop; 2-col grid (nav + info) — mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10 mb-6 sm:mb-10">
+
+          {/* Brand — desktop only */}
+          <div className="hidden sm:block">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
               <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-[#F5E6C8] flex-shrink-0">
-                <Image
-                  src="/images/logo.png"
-                  alt="HuellasCo"
-                  fill
-                  sizes="40px"
-                  className="object-contain p-1 mix-blend-multiply"
-                />
+                <Image src="/images/logo.png" alt="HuellasCo" fill sizes="40px" className="object-contain p-1 mix-blend-multiply" />
               </div>
               <span className="font-black text-xl text-white group-hover:text-[#C9973A] transition-colors">
                 Huellas<span className="text-[#C9973A]">Co</span>
               </span>
             </Link>
-
             <p className="text-sm text-white/70 leading-relaxed mb-5">
-              "Amor que 🐾 deja huella" — Productos de calidad para el bienestar de tus
-              mascotas. Porque ellos se merecen lo mejor.
+              "Amor que deja huella" — Productos de calidad para el bienestar de tus mascotas. Porque ellos se merecen lo mejor.
             </p>
-
-            <a
-              href="mailto:huellasco00@gmail.com"
-              className="inline-flex items-center gap-2 text-sm text-[#C9973A] hover:text-white transition-colors font-semibold"
-            >
+            <a href="mailto:huellasco00@gmail.com"
+              className="inline-flex items-center gap-2 text-sm text-[#C9973A] hover:text-white transition-colors font-semibold">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22,6 12,12 2,6" />
               </svg>
               huellasco00@gmail.com
             </a>
-
-            {/* Social */}
             <div className="flex gap-3 mt-5">
               {socialLinks.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C9973A] transition-colors text-white/80 hover:text-white"
-                >
+                <a key={s.label} href={s.href} aria-label={s.label}
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C9973A] transition-colors text-white/80 hover:text-white">
                   {s.icon}
                 </a>
               ))}
@@ -96,16 +113,13 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="font-bold text-sm uppercase tracking-wider text-[#C9973A] mb-4">
+            <h3 className="font-bold text-xs uppercase tracking-wider text-[#C9973A] mb-3 sm:mb-4">
               Navegación
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
-                  >
+                  <Link href={l.href} className="text-sm text-white/70 hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -115,10 +129,10 @@ export default function Footer() {
 
           {/* Policies */}
           <div>
-            <h3 className="font-bold text-sm uppercase tracking-wider text-[#C9973A] mb-4">
+            <h3 className="font-bold text-xs uppercase tracking-wider text-[#C9973A] mb-3 sm:mb-4">
               Información
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {[
                 'Política de envíos',
                 'Devoluciones y garantía',
@@ -136,7 +150,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <div className="border-t border-white/10 pt-5 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/40">
           <p>© 2025 HuellasCo. Todos los derechos reservados.</p>
           <div className="flex items-center gap-3">
             <span>🔒 Pago seguro</span>
